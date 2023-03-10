@@ -1,43 +1,32 @@
 import React, {useState} from 'react';
-class BookForm extends React.Component {
-	state = {
-		title: '',
-		author: '',
-	};
-	handleSubmit = (e) => {
+const BookForm = () => {
+	const [title, setTitle] = useState('');
+	const [author, setAuthor] = useState('');
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.addBook({title: this.state.title, author: this.state.author});
-		this.setState({...this.state, title: '', author: ''});
+		addBook({title, author});
+		setTitle('');
+		setAuthor('');
 	};
 
-	setTitle = (value) => {
-		this.setState({...this.state, title: value});
-	};
-	setAuthor = (value) => {
-		this.setState({...this.state, author: value});
-	};
-
-	render() {
-		const {handleSubmit, setTitle, setAuthor} = this;
-		const {title, author} = this.state;
-		return (
-			<form onSubmit={handleSubmit}>
-				Title:
-				<input
-					type='text'
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-				></input>
-				Author:
-				<input
-					type='text'
-					value={author}
-					onChange={(e) => setAuthor(e.target.value)}
-				></input>
-				<button>Add book</button>
-			</form>
-		);
-	}
-}
+	return (
+		<form onSubmit={handleSubmit}>
+			Title:
+			<input
+				type='text'
+				value={title}
+				onChange={(e) => setTitle(e.target.value)}
+			></input>
+			Author:
+			<input
+				type='text'
+				value={author}
+				onChange={(e) => setAuthor(e.target.value)}
+			></input>
+			<button>Add book</button>
+		</form>
+	);
+};
 
 export default BookForm;
